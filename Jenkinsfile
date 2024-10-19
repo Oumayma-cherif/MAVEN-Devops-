@@ -10,16 +10,22 @@ pipeline {
         stage('Upload to Nexus') {
             steps {
                 nexusArtifactUploader(
-                    nexusUrl: 'http://localhost:8081', // Your Nexus URL
-                    nexusCredentialsId: 'nexus-credentials', // Jenkins credentials ID
-                    groupId: 'com.example',
-                    artifactId: 'my-app',
-                    version: '1.0-SNAPSHOT',
-                    packaging: 'jar',
-                    files: [
-                        [file: 'target/my-app-1.0-SNAPSHOT.jar', classifier: '', type: 'jar']
-                    ]
-                )
+    nexusVersion: 'nexus3',
+    protocol: 'http',
+    nexusUrl: 'localhost:8081',
+    groupId: 'com.example',
+    version: '1.0-SNAPSHOT',
+    repository: 'maven-releases',
+    artifacts: [
+        [
+            artifactId: 'my-app',
+            classifier: '',
+            file: 'target/my-app-1.0-SNAPSHOT.jar',
+            type: 'jar'
+        ]
+    ]
+)
+
             }
         }
     }
