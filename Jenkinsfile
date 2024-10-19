@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone your GitHub repository
+                
                 git branch: 'main',
                     url: 'https://github.com/Oumayma-cherif/MAVEN-Devops-.git'
             }
