@@ -30,9 +30,9 @@ pipeline {
                     [
                         artifactId: 'my-app', // ID de votre artefact
                         classifier: '',
-                        file: 'target/my-app-1.0-SNAPSHOT.jar', // Chemin vers votre artefact JAR
-                        groupId: 'com.example', // Group ID de votre artefact
-                        version: '1.0-SNAPSHOT' // Version de l'artefact
+                        file: 'target/my-app-1.0.0.jar', // Utilisez la version Release
+                        groupId: 'com.example',
+                        version: '1.0.0' // Version Release
                     ]
                 ],
                 credentialsId: 'nexus-credentials', // ID des identifiants Jenkins pour Nexus
