@@ -18,5 +18,27 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+        stage('Build') {
+            steps {
+                // Construire le projet avec Maven
+                sh 'mvn package'
+            }
+        }
+        stage('Publish to Nexus') {
+            steps {
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'my-app', // ID de votre artefact
+                        classifier: '',
+                        file: 'target/my-app-1.0-SNAPSHOT.jar', // Chemin vers votre artefact JAR
+                        groupId: 'com.example', // Group ID de votre artefact
+                        version: '1.0-SNAPSHOT' // Version de l'artefact
+                    ]
+                ],
+                credentialsId: 'nexus-credentials', // ID des identifiants Jenkins pour Nexus
+                nexusUrl: 'http://localhost:8081', // URL de votre Nexus
+                nexusVersion: 'nexus3' // Utilisez 'nexus3' pour Nexus 3.x
+            }
+        }
     }
 }
