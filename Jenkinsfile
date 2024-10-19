@@ -36,7 +36,7 @@ pipeline {
                     ]
                 ],
                 credentialsId: 'nexus-credentials', // ID des identifiants Jenkins pour Nexus
-                nexusUrl: 'http://localhost:8081', // URL de votre Nexus
+                nexusUrl: 'http://localhost:8081/repository/maven-releases/', // URL de votre Nexus
                 nexusVersion: 'nexus3' // Utilisez 'nexus3' pour Nexus 3.x
             }
         }
