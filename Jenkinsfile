@@ -8,15 +8,20 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone your GitHub repository
-                git branch: 'main', // Use 'main' or 'master' based on your default branch
+                git branch: 'main',
                     url: 'https://github.com/Oumayma-cherif/MAVEN-Devops-.git'
             }
-        } 
-        
+        }
         stage('Build') {
             steps {
                 // Build the project with Maven
                 sh 'mvn clean package'
+            }
+        }
+        stage('List Target Directory') {
+            steps {
+                // List contents of the target directory to verify the artifact was created
+                sh 'ls -l target'
             }
         }
         stage('Publish to Nexus') {
