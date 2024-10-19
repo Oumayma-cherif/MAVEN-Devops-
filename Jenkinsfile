@@ -22,6 +22,7 @@ pipeline {
                             groupId: 'com.example',
                             version: '1.0-SNAPSHOT',
                             repository: 'maven-releases',
+                            credentialsId: 'nexus-credentials', // Use your Jenkins credential ID here
                             artifacts: [
                                 [
                                     artifactId: 'my-app',
