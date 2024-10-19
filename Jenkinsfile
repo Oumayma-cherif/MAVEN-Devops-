@@ -11,7 +11,8 @@ pipeline {
                 git branch: 'main', // Use 'main' or 'master' based on your default branch
                     url: 'https://github.com/Oumayma-cherif/MAVEN-Devops-.git'
             }
-        }
+        } 
+        
         stage('Build') {
             steps {
                 // Build the project with Maven
