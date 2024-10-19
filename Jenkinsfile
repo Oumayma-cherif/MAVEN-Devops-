@@ -1,49 +1,25 @@
 pipeline {
     agent any
-    tools {
-        jdk 'JAVA_HOME' // Ensure that JAVA_HOME is set correctly in Jenkins
-        maven 'MAVEN_HOME' // Ensure that M2_HOME is set correctly in Jenkins
-    }
     stages {
-        stage('Clone Repository') {
-            steps {
-                
-                git branch: 'main',
-                    url: 'https://github.com/Oumayma-cherif/MAVEN-Devops-.git'
-            }
-        }
         stage('Build') {
             steps {
-                // Build the project with Maven
-                sh 'mvn clean package'
+                // Build the Maven project
+                sh 'mvn clean install'
             }
         }
-        stage('List Target Directory') {
+        stage('Upload to Nexus') {
             steps {
-                // List contents of the target directory to verify the artifact was created
-                sh 'ls -l target'
-            }
-        }
-        stage('Publish to Nexus') {
-            steps {
-                script {
-                    nexusArtifactUploader(
-                        nexusUrl: 'http://localhost:8081', // URL de votre Nexus
-                        repository: 'maven-releases', // Nom de votre dépôt dans Nexus
-                        credentialsId: 'nexus-credentials', // ID des identifiants Jenkins pour Nexus
-                        artifacts: [
-                            [
-                                artifactId: 'my-app', // ID de votre artefact
-                                groupId: 'com.example', // Group ID de votre artefact
-                                version: '1.0.0', // Version Release
-                                classifier: '',
-                                file: 'target/my-app-1.0.0.jar' // Chemin vers votre artefact JAR
-                            ]
-                        ],
-                        nexusVersion: 'nexus3', // Utilisez 'nexus3' pour Nexus 3.x
-                        protocol: 'http' // Protocole à utiliser
-                    )
-                }
+                nexusArtifactUploader(
+                    nexusUrl: 'http://localhost:8081', // Your Nexus URL
+                    nexusCredentialsId: 'nexus-credentials', // Jenkins credentials ID
+                    groupId: 'com.example',
+                    artifactId: 'my-app',
+                    version: '1.0-SNAPSHOT',
+                    packaging: 'jar',
+                    files: [
+                        [file: 'target/my-app-1.0-SNAPSHOT.jar', classifier: '', type: 'jar']
+                    ]
+                )
             }
         }
     }
