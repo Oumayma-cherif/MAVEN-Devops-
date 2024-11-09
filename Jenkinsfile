@@ -55,7 +55,7 @@ pipeline {
 
         
         echo "Sending success email..."
-        emailext subject: "Jenkins Build - Success",
+        emailext (  
                  body: """
                 <html>
                 <body>
@@ -66,10 +66,12 @@ pipeline {
                 </body>
             </html>
         """,
-        to: 'oumayma.cherif@esprit.tn', // Updated email address
+            subject: "Jenkins Build - Success",
+          to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
-                 mimeType: 'text/html'
+                 mimeType: 'text/html' 
+                  )
         echo "Success email sent."
     }
     failure {
@@ -81,7 +83,7 @@ pipeline {
 
         
         echo "Sending failure email..."
-        emailext subject: "Jenkins Build - Failure",
+        emailext ( 
                 body: """
                 <html>
                 <body>
@@ -92,10 +94,12 @@ pipeline {
                 </body>
             </html>
         """,
-       to: 'oumayma.cherif@esprit.tn', // Updated email address
+            subject: "Jenkins Build - Failure",
+             to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
                  mimeType: 'text/html'
+                  ) 
         echo "Failure email sent."
     }
 }
