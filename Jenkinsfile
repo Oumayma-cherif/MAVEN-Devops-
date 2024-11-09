@@ -41,50 +41,46 @@ pipeline {
         }
     }
 
-   post {
-    always {
-        echo 'Cleaning up workspace...'
-        cleanWs()
-    }
-    success {
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()
+        }
+        success {
+            def imageWidth = '800px'
+            def imageHeight = 'auto'
+            def imageUrl = 'https://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg'
 
-    def imageWidth = '800px' // Set the desired width in pixels
-    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
-    def imageUrl = 'https://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg'
-
-        
-        echo "Sending success email..."
-        emailext subject: "Jenkins Build - Success",
-                 body: """
+            echo "Sending success email..."
+            emailext subject: "Jenkins Build - Success",
+                     body: """
                      <p>The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
                      <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
                      <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
-                    """,
-                 to: 'oumayma.cherif@esprit.tn', // Updated email address
-                 from: 'oumayma.cherif@esprit.tn', // Updated email address
-                 replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
-                 mimeType: 'text/html'
-        echo "Success email sent."
-    }
-    failure {
-        
-    def imageWidth = '800px' // Set the desired width in pixels
-    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
-    def imageUrl = 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ytlj68SIRGvi9mecSDb52g.png'
-        
-        echo "Sending failure email..."
-        emailext subject: "Jenkins Build - Failure",
-                 body: """
-                 <p>Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
-                 <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
-                 <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
-                    """,
-                 to: 'oumayma.cherif@esprit.tn', // Updated email address
-                 from: 'oumayma.cherif@esprit.tn', // Updated email address
-                 replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
-                 mimeType: 'text/html'
-        echo "Failure email sent."
-    }
-}
+                     """,
+                     to: 'oumayma.cherif@esprit.tn',
+                     from: 'oumayma.cherif@esprit.tn',
+                     replyTo: 'oumayma.cherif@esprit.tn',
+                     mimeType: 'text/html'
+            echo "Success email sent."
+        }
+        failure {
+            def imageWidth = '800px'
+            def imageHeight = 'auto'
+            def imageUrl = 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ytlj68SIRGvi9mecSDb52g.png'
 
+            echo "Sending failure email..."
+            emailext subject: "Jenkins Build - Failure",
+                     body: """
+                     <p>Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
+                     <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
+                     <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
+                     """,
+                     to: 'oumayma.cherif@esprit.tn',
+                     from: 'oumayma.cherif@esprit.tn',
+                     replyTo: 'oumayma.cherif@esprit.tn',
+                     mimeType: 'text/html'
+            echo "Failure email sent."
+        }
+    }
 }
