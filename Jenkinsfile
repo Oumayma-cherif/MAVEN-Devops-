@@ -14,7 +14,6 @@
                     <p>YEEEEY, The Jenkins job was successful.</p>
                     <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
                     <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
-                    <p>Console Log is attached.</p>
                 </body>
             </html>
         """,
@@ -42,7 +41,6 @@
                     <p> eewww , The Jenkins job Failed .</p>
                     <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
                     <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
-                    <p>Console Log is attached.</p>
                 </body>
             </html>
         """,
