@@ -1,6 +1,6 @@
  def success {
 
-    def imageUrl = 'hhttps://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg' // Replace with the actual URL of your image
+    def imageUrl = 'https://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg' // Replace with the actual URL of your image
     def imageWidth = '800px' // Set the desired width in pixels
     def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
 
