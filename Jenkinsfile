@@ -56,9 +56,10 @@ pipeline {
         echo "Sending success email..."
         emailext subject: "Jenkins Build - Success",
                  body: """
-                 The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
-                 Check console output at ${env.BUILD_URL} to view the details.
-                 """,
+                     <p>The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
+                     <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
+                     <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
+                    """,
                  to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
@@ -66,6 +67,7 @@ pipeline {
         echo "Success email sent."
     }
     failure {
+        
     def imageWidth = '800px' // Set the desired width in pixels
     def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
     def imageUrl = 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ytlj68SIRGvi9mecSDb52g.png'
@@ -73,9 +75,10 @@ pipeline {
         echo "Sending failure email..."
         emailext subject: "Jenkins Build - Failure",
                  body: """
-                 Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
-                 Check console output at ${env.BUILD_URL} to view the details.
-                 """,
+                 <p>Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
+                 <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
+                 <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
+                    """,
                  to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
