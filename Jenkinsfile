@@ -53,9 +53,9 @@ pipeline {
                      The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
                      Check console output at ${env.BUILD_URL} to view the details.
                      """,
-                     to: 'oumayma.cherif@esprit.tn', // Replace with recipient's email
-                     from: 'oumayma.cherif@esprit.tn', // Your email
-                     replyTo: 'oumayma.cherif@esprit.tn', // Your email
+                     to: 'maymach1823@gmail.com', // Updated email address
+                     from: 'maymach1823@gmail.com', // Updated email address
+                     replyTo: 'maymach1823@gmail.com', // Updated email address
                      mimeType: 'text/html'
             echo "Success email sent."
         }
@@ -66,9 +66,9 @@ pipeline {
                      Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
                      Check console output at ${env.BUILD_URL} to view the details.
                      """,
-                     to: 'oumayma.cherif@esprit.tn', // Replace with recipient's email
-                     from: 'oumayma.cherif@esprit.tn', // Your email
-                     replyTo: 'oumayma.cherif@esprit.tn', // Your email
+                     to: 'maymach1823@gmail.com', // Updated email address
+                     from: 'maymach1823@gmail.com', // Updated email address
+                     replyTo: 'maymach1823@gmail.com', // Updated email address
                      mimeType: 'text/html'
             echo "Failure email sent."
         }
