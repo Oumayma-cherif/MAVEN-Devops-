@@ -40,4 +40,18 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            emailext subject: "Jenkins Build - ${currentBuild.currentResult}",
+                     body: """
+                     The build result for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}) is ${currentBuild.currentResult}.
+                     Check console output at ${env.BUILD_URL} to view the details.
+                     """,
+                     to: 'oumayma.cherif@esprit.tn', // Replace with recipient's email
+                     from: 'oumayma.cherif@esprit.tn', // Your email
+                     replyTo: 'oumayma.cherif@esprit.tn', // Your email
+                     mimeType: 'text/html'
+        }
+    }
 }
