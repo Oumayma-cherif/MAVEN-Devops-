@@ -43,15 +43,34 @@ pipeline {
 
     post {
         always {
-            emailext subject: "Jenkins Build - ${currentBuild.currentResult}",
+            echo 'Cleaning up workspace...'
+            cleanWs()
+        }
+        success {
+            echo "Sending success email..."
+            emailext subject: "Jenkins Build - Success",
                      body: """
-                     The build result for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}) is ${currentBuild.currentResult}.
+                     The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
                      Check console output at ${env.BUILD_URL} to view the details.
                      """,
                      to: 'oumayma.cherif@esprit.tn', // Replace with recipient's email
                      from: 'oumayma.cherif@esprit.tn', // Your email
                      replyTo: 'oumayma.cherif@esprit.tn', // Your email
                      mimeType: 'text/html'
+            echo "Success email sent."
+        }
+        failure {
+            echo "Sending failure email..."
+            emailext subject: "Jenkins Build - Failure",
+                     body: """
+                     Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
+                     Check console output at ${env.BUILD_URL} to view the details.
+                     """,
+                     to: 'oumayma.cherif@esprit.tn', // Replace with recipient's email
+                     from: 'oumayma.cherif@esprit.tn', // Your email
+                     replyTo: 'oumayma.cherif@esprit.tn', // Your email
+                     mimeType: 'text/html'
+            echo "Failure email sent."
         }
     }
 }
