@@ -68,34 +68,7 @@ pipeline {
             }
         }
 
-        stage('Upload to Nexus') {
-            steps {
-                script {
-                    try {
-                        nexusArtifactUploader(
-                            nexusVersion: 'nexus3',
-                            protocol: 'http',
-                            nexusUrl: 'localhost:8081',
-                            groupId: 'com.example',
-                            version: '1.0-SNAPSHOT',
-                            repository: 'maven-releases',
-                            credentialsId: 'nexus-credentials', // Use your Jenkins credential ID here
-                            artifacts: [
-                                [
-                                    artifactId: 'my-app',
-                                    classifier: '',
-                                    file: 'target/my-app-1.0-SNAPSHOT.jar',
-                                    type: 'jar'
-                                ]
-                            ]
-                        )
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        error "Upload failed: ${e.message}"
-                    }
-                }
-            }
-        }
+        
          stage('Email Notification') {
             steps {
                 script {
