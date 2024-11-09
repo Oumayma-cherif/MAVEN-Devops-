@@ -47,6 +47,12 @@ pipeline {
         cleanWs()
     }
     success {
+
+    def imageWidth = '800px' // Set the desired width in pixels
+    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
+    def imageUrl = 'https://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg'
+
+        
         echo "Sending success email..."
         emailext subject: "Jenkins Build - Success",
                  body: """
@@ -60,6 +66,10 @@ pipeline {
         echo "Success email sent."
     }
     failure {
+    def imageWidth = '800px' // Set the desired width in pixels
+    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
+    def imageUrl = 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ytlj68SIRGvi9mecSDb52g.png'
+        
         echo "Sending failure email..."
         emailext subject: "Jenkins Build - Failure",
                  body: """
