@@ -54,10 +54,16 @@ pipeline {
             echo "Sending success email..."
             emailext subject: "Jenkins Build - Success",
                      body: """
-                     <p>The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
-                     <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
-                     <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
-                     """,
+                    body: """
+            <html>
+                <body>
+                    <p>YEEEEY, The Jenkins job was successful.</p>
+                    <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                    <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
+                    <p>Console Log is attached.</p>
+                </body>
+            </html>
+        """,  
                      to: 'oumayma.cherif@esprit.tn',
                      from: 'oumayma.cherif@esprit.tn',
                      replyTo: 'oumayma.cherif@esprit.tn',
@@ -71,11 +77,16 @@ pipeline {
 
             echo "Sending failure email..."
             emailext subject: "Jenkins Build - Failure",
-                     body: """
-                     <p>Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).</p>
-                     <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view the details.</p>
-                     <p><img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}"></p>
-                     """,
+                    body: """
+            <html>
+                <body>
+                    <p>noooo , The Jenkins job Failed .</p>
+                    <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                    <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
+                    <p>Console Log is attached.</p>
+                </body>
+            </html>
+        """,
                      to: 'oumayma.cherif@esprit.tn',
                      from: 'oumayma.cherif@esprit.tn',
                      replyTo: 'oumayma.cherif@esprit.tn',
