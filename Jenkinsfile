@@ -47,26 +47,52 @@ pipeline {
         cleanWs()
     }
     success {
+
+    def imageUrl = 'hhttps://semaphoreci.com/wp-content/uploads/2020/02/cic-cd-explained.jpg' // Replace with the actual URL of your image
+    def imageWidth = '800px' // Set the desired width in pixels
+    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
+
+
+        
         echo "Sending success email..."
         emailext subject: "Jenkins Build - Success",
                  body: """
-                 The build was successful for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
-                 Check console output at ${env.BUILD_URL} to view the details.
-                 """,
-                 to: 'oumayma.cherif@esprit.tn', // Updated email address
+                <html>
+                <body>
+                    <p>YEEEEY, The Jenkins job was successful.</p>
+                    <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                    <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
+                    <p>Console Log is attached.</p>
+                </body>
+            </html>
+        """,
+        to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
                  mimeType: 'text/html'
         echo "Success email sent."
     }
     failure {
+
+    def imageUrl = 'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ytlj68SIRGvi9mecSDb52g.png' // Replace with the actual URL of your image
+    def imageWidth = '800px' // Set the desired width in pixels
+    def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
+
+
+        
         echo "Sending failure email..."
         emailext subject: "Jenkins Build - Failure",
-                 body: """
-                 Unfortunately, the build has failed for job ${env.JOB_NAME} (#${env.BUILD_NUMBER}).
-                 Check console output at ${env.BUILD_URL} to view the details.
-                 """,
-                 to: 'oumayma.cherif@esprit.tn', // Updated email address
+                body: """
+                <html>
+                <body>
+                    <p> eewww , The Jenkins job Failed .</p>
+                    <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                    <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
+                    <p>Console Log is attached.</p>
+                </body>
+            </html>
+        """,
+       to: 'oumayma.cherif@esprit.tn', // Updated email address
                  from: 'oumayma.cherif@esprit.tn', // Updated email address
                  replyTo: 'oumayma.cherif@esprit.tn', // Updated email address
                  mimeType: 'text/html'
